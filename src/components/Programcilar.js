@@ -13,7 +13,7 @@ Yorumları takip edin.
 
 import React from 'react';
 /* ADIM 0  */
-
+import { useState } from 'react';
 
 // Bu değişkeni YALNIZCA bir state dilimini başlatmak için kullanın!
 // JSX'te şu anda bu kuralı çiğneyen bir şey var...
@@ -30,7 +30,8 @@ export const enIyilerListesi = [
 export default function Programcilar() {
   // İki state dilimine ihtiyacımız olduğundan, state hooku iki kez kullanmamız gerekecek..
   // Bir yanda programcılar listesi, diğer yanda öne çıkan programcının idsi.
-
+  const [programcilar, setProgramcilar] = useState(enIyilerListesi);
+  const [oneCikanID, setOneCikanID] = useState("");
 	
   const oneCikaninIsmi = () => {
     // Bunu sona bırakın!
@@ -38,12 +39,13 @@ export default function Programcilar() {
     // Öne çıkan geliştiricinin _isim_ adını döndürmek için her iki state dilimini kullanacak.
     // Closureların güzelliği, argümanlar yoluyla bilgi enjekte etmeye gerek kalmadan programın 
 	// bu bölgesinden her iki state dilimini de "görebilmemiz"dir.
+  return enIyilerListesi.find(x => x.id === oneCikanID).isim;
   };
 
   const stil = {
     fontSize: '1.5em',
     marginTop: '0.5em',
-    color: 'royalblue', // 🤔 kutlarken renk gold'a dönecek
+    color: oneCikanID !== "" ? "gold": "royalblue" , // 🤔 kutlarken renk gold'a dönecek
   };
 
   return (
@@ -55,9 +57,9 @@ export default function Programcilar() {
           // Şöyle diyebiliriz: "aa bu çalışıyor!" Ama programcilar bir state diliminden gelmiyorsa,
           // asla yeni programci ekleyemeyiz, programcilari düzenleyemeyiz ya da silemeyiz. Düzeltin!
           " */
-          enIyilerListesi.map(dev =>
+          programcilar.map(dev =>
             <div className='programmer' key={dev.id}>
-              {dev.isim} <button onClick={() => {/* burada dev.id 'yi öne çıkan id'ye atayın */ }}>Kutla</button>
+              {dev.isim} <button onClick={() => {setOneCikanID(dev.id)}}>Kutla</button>
             </div>
           )
         }
@@ -67,7 +69,7 @@ export default function Programcilar() {
           // Üçlüler, bir şeyin "gerçekliğine" bağlı olarak "bir şeyi veya diğerini" ifade etmek için harikadır..
           // Sözde-kod: öne çıkan true ise metin 1'i oluşturun, aksi takdirde metin 2'yi oluşturun..
           // Sabit kodlanmış false'u doğru değişkenle değiştirin.
-          false
+          oneCikanID
             ? `🎉 Hadi ${oneCikaninIsmi()}'ı kutlayalım! 🥳`
             : 'Harika bir programcı seçin'
         }

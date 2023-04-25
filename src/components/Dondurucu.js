@@ -53,7 +53,7 @@ export default function Dondurucu() {
       }
       <button id='toggleDondurucu' onClick={toggleDondurucu}>
          {dondurucuacik && "Gizle"}
-         {!dondurucuacik && "Goster"}
+         {!dondurucuacik && "Göster"}
       </button>
     </div>
   );

@@ -54,7 +54,7 @@ function renkSecici(){
   } else if(ruhHali == uzgunRuhHali) {
     return "crimson"
   } else {
-    return "black"
+    return "crimson"
   }
 }
 
